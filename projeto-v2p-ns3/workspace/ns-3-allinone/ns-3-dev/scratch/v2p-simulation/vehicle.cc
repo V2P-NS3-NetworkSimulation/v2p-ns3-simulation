@@ -72,8 +72,34 @@ void Vehicle::SetBehavior(const Behavior& behavior) {
 }
 
 void Vehicle::Communicate(Pedestrian& pedestrian) {
-    printf("O Veículo de id %d está comunicando com o Pedestre de id %d.\n",
-    this->id,
-    pedestrian.GetId()
-);
+    printf(
+        "O Veículo de id %d está comunicando com o Pedestre de id %d.\n",
+        this->id,
+        pedestrian.GetId()
+    );
+
+    printf("__________________\n");
+
+    printf(
+        "O Veículo de id %d: \nlane: %d; x: %.2lf, y: %.2lf, speed: %.2lf, acceleration: %.2lf, direction: %.2lf\n",
+        this->id,
+        this->GetLane(),
+        this->GetPosition().x,
+        this->GetPosition().y,
+        this->GetMobilityModel().GetSpeed(),
+        this->GetMobilityModel().GetAcceleration(),
+        this->GetMobilityModel().GetDirection()
+    );
+    printf("__________________\n");
+
+    printf(
+        "O Pedestre de id %d: \nx: %.2lf, y: %.2lf, speed: %.2lf, acceleration: %.2lf, direction: %.2lf\n",
+        pedestrian.GetId(),
+        pedestrian.GetPosition().x,
+        pedestrian.GetPosition().y,
+        pedestrian.GetMobilityModel().GetSpeed(),
+        pedestrian.GetMobilityModel().GetAcceleration(),
+        pedestrian.GetMobilityModel().GetDirection()
+    );
+    printf("__________________\n");
 }

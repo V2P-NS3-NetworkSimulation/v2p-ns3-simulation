@@ -14,7 +14,6 @@ using namespace ns3;
     V2P-Simulation 0.0.1 25/07/2023
 */
 int main (int argc, char *argv[]) {
-    printf("Aqui 1\n");
 
     // LogComponentEnable("pedestrian", LOG_LEVEL_INFO);
     // LogComponentEnable("vehicle", LOG_LEVEL_INFO);
@@ -39,17 +38,14 @@ int main (int argc, char *argv[]) {
     mobility.Install(pedestrians);
 
     // Configure a comunicação V2P entre o veículo e o pedestre
-    Vehicle vehicle(1, 0, 0.0, 0.0, 0.0, 0.0, 0.0);
-    Pedestrian pedestrian(1, 0.0, 10.0, 0.0, 0.0, 0.0);
+    Vehicle vehicle(1, 0, 5.0, 1.0, 20.0, 5.0, 90.0);
+    Pedestrian pedestrian(1, 0.0, 10.0, 0.5, 0.1, 0.0);
     vehicle.Communicate(pedestrian);
 
-    // Criar objeto de animação
-    AnimationInterface anim("v2p-simulation.xml");
 
     Simulator::Run();
     Simulator::Destroy();
 
-    printf("Aqui 2\n");
 
     return 0;
 }
