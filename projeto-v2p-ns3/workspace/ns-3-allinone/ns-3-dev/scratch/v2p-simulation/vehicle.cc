@@ -8,8 +8,18 @@
 */
 Vehicle::Vehicle() : id(0), lane(0) {}
 
-Vehicle::Vehicle(int id, int lane, double x, double y, double speed, double acceleration, double direction)
-    : id(id), lane(lane), position(x, y), mobilityModel(speed, acceleration, direction) {}
+Vehicle::Vehicle(
+    int id,
+    int lane,
+    double x,
+    double y,
+    double speed,
+    double acceleration,
+    double direction
+) : id(id),
+    lane(lane),
+    position(x, y),
+    mobilityModel(speed, acceleration, direction) {}
 
 int Vehicle::GetId() const {
     return id;
@@ -39,7 +49,9 @@ Communication Vehicle::GetCommunicationModel() const {
     return communicationModel;
 }
 
-void Vehicle::SetCommunicationModel(const Communication& communicationModel) {
+void Vehicle::SetCommunicationModel(
+    const Communication& communicationModel
+) {
     this->communicationModel = communicationModel;
 }
 
@@ -60,5 +72,8 @@ void Vehicle::SetBehavior(const Behavior& behavior) {
 }
 
 void Vehicle::Communicate(Pedestrian& pedestrian) {
-    printf("O Veículo de id %d está comunicando com o Pedestre de id %d.\n", this->id, pedestrian.GetId());
+    printf("O Veículo de id %d está comunicando com o Pedestre de id %d.\n",
+    this->id,
+    pedestrian.GetId()
+);
 }

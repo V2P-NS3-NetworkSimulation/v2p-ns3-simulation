@@ -10,7 +10,11 @@
 class Communication {
 public:
     Communication();
-    Communication(const std::string& type, double frequency, double range);
+    Communication(
+        const std::string& type,
+        double frequency,
+        double range
+    );
     ~Communication();
 
     std::string GetType() const;

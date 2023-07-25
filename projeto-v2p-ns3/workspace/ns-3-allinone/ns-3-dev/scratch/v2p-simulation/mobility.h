@@ -8,7 +8,12 @@
 class Mobility {
 public:
     Mobility();
-    Mobility(double speed, double acceleration, double direction);
+    Mobility(
+        double speed,
+        double acceleration,
+        double direction
+    );
+    
     ~Mobility();
 
     double GetSpeed() const;

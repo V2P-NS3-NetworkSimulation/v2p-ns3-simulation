@@ -17,7 +17,15 @@ class Pedestrian; // Forward declaration of Pedestrian
 class Vehicle {
 public:
     Vehicle();
-    Vehicle(int id, int lane, double x, double y, double speed, double acceleration, double direction);
+    Vehicle(
+        int id,
+        int lane,
+        double x,
+        double y,
+        double speed,
+        double acceleration,
+        double direction
+    );
 
     int GetId() const;
     void SetId(int id);
@@ -29,7 +37,9 @@ public:
     void SetPosition(const Vector2D& position);
 
     Communication GetCommunicationModel() const;
-    void SetCommunicationModel(const Communication& communicationModel);
+    void SetCommunicationModel(
+        const Communication& communicationModel
+    );
 
     Mobility GetMobilityModel() const;
     void SetMobilityModel(const Mobility& mobilityModel);

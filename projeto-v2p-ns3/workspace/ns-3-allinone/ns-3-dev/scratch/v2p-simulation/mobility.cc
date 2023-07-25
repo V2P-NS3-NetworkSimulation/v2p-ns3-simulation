@@ -6,8 +6,11 @@
 */
 Mobility::Mobility() : speed(0.0), acceleration(0.0), direction(0.0) {}
 
-Mobility::Mobility(double speed, double acceleration, double direction)
-    : speed(speed), acceleration(acceleration), direction(direction) {}
+Mobility::Mobility(
+    double speed,
+    double acceleration,
+    double direction
+) : speed(speed), acceleration(acceleration), direction(direction) {}
 
 Mobility::~Mobility() {}
 

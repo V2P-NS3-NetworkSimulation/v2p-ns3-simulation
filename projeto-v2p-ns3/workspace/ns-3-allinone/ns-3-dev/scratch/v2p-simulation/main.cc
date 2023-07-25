@@ -19,28 +19,31 @@ int main (int argc, char *argv[]) {
     // LogComponentEnable("pedestrian", LOG_LEVEL_INFO);
     // LogComponentEnable("vehicle", LOG_LEVEL_INFO);
 
-    // Create nodes
+    // Criar nós
     NodeContainer vehicles;
     vehicles.Create(1);
     NodeContainer pedestrians;
     pedestrians.Create(1);
 
-    // Set mobility models
+    // Definir modelos de mobilidade
     MobilityHelper mobility;
-    Ptr<ListPositionAllocator> positionAlloc = CreateObject<ListPositionAllocator>();
+    Ptr<ListPositionAllocator> positionAlloc
+        = CreateObject<ListPositionAllocator>();
     positionAlloc->Add(Vector(0.0, 0.0, 0.0));
-    positionAlloc->Add(Vector(100.0, 0.0, 0.0)); // Vehicles and pedestrians are 100 meters apart
+    positionAlloc->Add(Vector(100.0, 0.0, 0.0)); // Veículos e pedestres estão a 100 metros de distância
     mobility.SetPositionAllocator(positionAlloc);
-    mobility.SetMobilityModel("ns3::ConstantPositionMobilityModel");
+    mobility.SetMobilityModel(
+        "ns3::ConstantPositionMobilityModel"
+    );
     mobility.Install(vehicles);
     mobility.Install(pedestrians);
 
-    // Set up V2P communication between vehicle and pedestrian
+    // Configure a comunicação V2P entre o veículo e o pedestre
     Vehicle vehicle(1, 0, 0.0, 0.0, 0.0, 0.0, 0.0);
     Pedestrian pedestrian(1, 0.0, 10.0, 0.0, 0.0, 0.0);
     vehicle.Communicate(pedestrian);
 
-    // Create animation object
+    // Criar objeto de animação
     AnimationInterface anim("v2p-simulation.xml");
 
     Simulator::Run();

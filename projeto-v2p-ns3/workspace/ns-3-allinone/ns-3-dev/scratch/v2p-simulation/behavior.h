@@ -11,7 +11,10 @@
 class Behavior {
 public:
     Behavior();
-    Behavior(const std::string& type, const std::vector<double>& parameters);
+    Behavior(
+        const std::string& type,
+        const std::vector<double>& parameters
+    );
     ~Behavior();
 
     std::string GetType() const;
