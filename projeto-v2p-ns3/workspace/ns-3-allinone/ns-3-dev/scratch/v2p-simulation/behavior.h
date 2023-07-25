@@ -1,3 +1,4 @@
+// behavior.h
 #ifndef BEHAVIOR_H
 #define BEHAVIOR_H
 

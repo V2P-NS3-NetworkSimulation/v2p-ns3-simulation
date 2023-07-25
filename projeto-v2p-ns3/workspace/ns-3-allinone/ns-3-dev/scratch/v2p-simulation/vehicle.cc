@@ -1,5 +1,6 @@
+// vehicle.cpp
 #include "vehicle.h"
-#include "Vector2D.h"
+#include "vector2d.h"
 #include "pedestrian.h"
 
 Vehicle::Vehicle() : id(0), lane(0) {}
@@ -56,9 +57,5 @@ void Vehicle::SetBehavior(const Behavior& behavior) {
 }
 
 void Vehicle::Communicate(Pedestrian& pedestrian) {
-    printf(
-        "Vehicle with id %d is communicating with Pedestrian with id %d.\n",
-        this->id,
-        pedestrian.GetId()
-    );
+    printf("Vehicle with id %d is communicating with Pedestrian with id %d.\n", this->id, pedestrian.GetId());
 }

@@ -1,3 +1,4 @@
+// communication.cpp
 #include "communication.h"
 
 Communication::Communication() : frequency(0.0), range(0.0) {}

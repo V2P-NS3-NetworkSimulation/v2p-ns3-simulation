@@ -1,5 +1,6 @@
+// pedestrian.cpp
 #include "pedestrian.h"
-#include "Vector2D.h"
+#include "vector2d.h"
 #include "vehicle.h"
 
 Pedestrian::Pedestrian() : id(0) {}

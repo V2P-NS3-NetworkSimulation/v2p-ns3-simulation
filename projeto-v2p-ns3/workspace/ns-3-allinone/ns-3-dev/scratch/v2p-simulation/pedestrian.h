@@ -1,3 +1,4 @@
+// pedestrian.h
 #ifndef PEDESTRIAN_H
 #define PEDESTRIAN_H
 
@@ -5,7 +6,7 @@
 #include "behavior.h"
 #include "mobility.h"
 #include "communication.h"
-#include "Vector2D.h"
+#include "vector2d.h"
 
 class Vehicle; // Forward declaration of Vehicle
 
