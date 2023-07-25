@@ -8,6 +8,9 @@
 #include "communication.h"
 #include "vector2d.h"
 
+/*
+    V2P-Simulation 0.0.1 25/07/2023
+*/
 class Vehicle; // Forward declaration of Vehicle
 
 class Pedestrian {

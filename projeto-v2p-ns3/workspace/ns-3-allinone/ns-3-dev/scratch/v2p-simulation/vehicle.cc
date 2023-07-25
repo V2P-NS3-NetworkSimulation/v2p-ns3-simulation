@@ -3,6 +3,9 @@
 #include "vector2d.h"
 #include "pedestrian.h"
 
+/*
+    V2P-Simulation 0.0.1 25/07/2023
+*/
 Vehicle::Vehicle() : id(0), lane(0) {}
 
 Vehicle::Vehicle(int id, int lane, double x, double y, double speed, double acceleration, double direction)
@@ -57,5 +60,5 @@ void Vehicle::SetBehavior(const Behavior& behavior) {
 }
 
 void Vehicle::Communicate(Pedestrian& pedestrian) {
-    printf("Vehicle with id %d is communicating with Pedestrian with id %d.\n", this->id, pedestrian.GetId());
+    printf("O Veículo de id %d está comunicando com o Pedestre de id %d.\n", this->id, pedestrian.GetId());
 }
