@@ -1,10 +1,19 @@
+// mobility.h
 #ifndef MOBILITY_H
 #define MOBILITY_H
 
+/*
+    V2P-Simulation 0.0.1 25/07/2023
+*/
 class Mobility {
 public:
     Mobility();
-    Mobility(double speed, double acceleration, double direction);
+    Mobility(
+        double speed,
+        double acceleration,
+        double direction
+    );
+    
     ~Mobility();
 
     double GetSpeed() const;

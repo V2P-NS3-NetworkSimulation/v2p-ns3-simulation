@@ -1,9 +1,15 @@
+// communication.cpp
 #include "communication.h"
 
+/*
+    V2P-Simulation 0.0.1 25/07/2023
+*/
 Communication::Communication() : frequency(0.0), range(0.0) {}
 
-Communication::Communication(const std::string& type, double frequency, double range)
-    : type(type), frequency(frequency), range(range) {}
+Communication::Communication(
+    const std::string& type,
+    double frequency, double range
+) : type(type), frequency(frequency), range(range) {}
 
 Communication::~Communication() {}
 

@@ -1,11 +1,25 @@
+// pedestrian.cpp
 #include "pedestrian.h"
-#include "Vector2D.h"
+#include "vector2d.h"
 #include "vehicle.h"
 
+/*
+    V2P-Simulation 0.0.1 25/07/2023
+*/
 Pedestrian::Pedestrian() : id(0) {}
 
-Pedestrian::Pedestrian(int id, double x, double y, double speed, double acceleration, double direction)
-    : id(id), position(x, y), mobilityModel(speed, acceleration, direction) {}
+Pedestrian::Pedestrian(
+    int id,
+    double x,
+    double y,
+    double speed,
+    double acceleration,
+    double direction
+) : id(id), position(x, y), mobilityModel(
+    speed,
+    acceleration,
+    direction
+) {}
 
 int Pedestrian::GetId() const {
     return id;
@@ -27,7 +41,9 @@ Communication Pedestrian::GetCommunicationModel() const {
     return communicationModel;
 }
 
-void Pedestrian::SetCommunicationModel(const Communication& communicationModel) {
+void Pedestrian::SetCommunicationModel(
+    const Communication& communicationModel
+) {
     this->communicationModel = communicationModel;
 }
 
@@ -48,5 +64,8 @@ void Pedestrian::SetBehavior(const Behavior& behavior) {
 }
 
 void Pedestrian::Communicate(Vehicle& vehicle) {
-    printf("Pedestrian with id %d is communicating with Vehicle with id %d.\n", this->id, vehicle.GetId());
+    printf("O Pedestre de id %d está comunicando com o Pedestre de id %d.\n",
+    this->id,
+    vehicle.GetId()
+);
 }

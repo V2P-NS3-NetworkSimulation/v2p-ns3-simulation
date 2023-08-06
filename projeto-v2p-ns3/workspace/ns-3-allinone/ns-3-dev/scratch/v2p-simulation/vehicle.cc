@@ -1,11 +1,25 @@
+// vehicle.cpp
 #include "vehicle.h"
-#include "Vector2D.h"
+#include "vector2d.h"
 #include "pedestrian.h"
 
+/*
+    V2P-Simulation 0.0.1 25/07/2023
+*/
 Vehicle::Vehicle() : id(0), lane(0) {}
 
-Vehicle::Vehicle(int id, int lane, double x, double y, double speed, double acceleration, double direction)
-    : id(id), lane(lane), position(x, y), mobilityModel(speed, acceleration, direction) {}
+Vehicle::Vehicle(
+    int id,
+    int lane,
+    double x,
+    double y,
+    double speed,
+    double acceleration,
+    double direction
+) : id(id),
+    lane(lane),
+    position(x, y),
+    mobilityModel(speed, acceleration, direction) {}
 
 int Vehicle::GetId() const {
     return id;
@@ -35,7 +49,9 @@ Communication Vehicle::GetCommunicationModel() const {
     return communicationModel;
 }
 
-void Vehicle::SetCommunicationModel(const Communication& communicationModel) {
+void Vehicle::SetCommunicationModel(
+    const Communication& communicationModel
+) {
     this->communicationModel = communicationModel;
 }
 
@@ -57,8 +73,33 @@ void Vehicle::SetBehavior(const Behavior& behavior) {
 
 void Vehicle::Communicate(Pedestrian& pedestrian) {
     printf(
-        "Vehicle with id %d is communicating with Pedestrian with id %d.\n",
+        "O Veículo de id %d está comunicando com o Pedestre de id %d.\n",
         this->id,
         pedestrian.GetId()
     );
+
+    printf("__________________\n");
+
+    printf(
+        "O Veículo de id %d: \nlane: %d; x: %.2lf, y: %.2lf, speed: %.2lf, acceleration: %.2lf, direction: %.2lf\n",
+        this->id,
+        this->GetLane(),
+        this->GetPosition().x,
+        this->GetPosition().y,
+        this->GetMobilityModel().GetSpeed(),
+        this->GetMobilityModel().GetAcceleration(),
+        this->GetMobilityModel().GetDirection()
+    );
+    printf("__________________\n");
+
+    printf(
+        "O Pedestre de id %d: \nx: %.2lf, y: %.2lf, speed: %.2lf, acceleration: %.2lf, direction: %.2lf\n",
+        pedestrian.GetId(),
+        pedestrian.GetPosition().x,
+        pedestrian.GetPosition().y,
+        pedestrian.GetMobilityModel().GetSpeed(),
+        pedestrian.GetMobilityModel().GetAcceleration(),
+        pedestrian.GetMobilityModel().GetDirection()
+    );
+    printf("__________________\n");
 }

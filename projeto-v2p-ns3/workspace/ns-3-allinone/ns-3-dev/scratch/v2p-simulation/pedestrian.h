@@ -1,3 +1,4 @@
+// pedestrian.h
 #ifndef PEDESTRIAN_H
 #define PEDESTRIAN_H
 
@@ -5,14 +6,24 @@
 #include "behavior.h"
 #include "mobility.h"
 #include "communication.h"
-#include "Vector2D.h"
+#include "vector2d.h"
 
+/*
+    V2P-Simulation 0.0.1 25/07/2023
+*/
 class Vehicle; // Forward declaration of Vehicle
 
 class Pedestrian {
 public:
     Pedestrian();
-    Pedestrian(int id, double x, double y, double speed, double acceleration, double direction);
+    Pedestrian(
+        int id,
+        double x,
+        double y,
+        double speed,
+        double acceleration,
+        double direction
+    );
 
     int GetId() const;
     void SetId(int id);
@@ -21,7 +32,9 @@ public:
     void SetPosition(const Vector2D& position);
 
     Communication GetCommunicationModel() const;
-    void SetCommunicationModel(const Communication& communicationModel);
+    void SetCommunicationModel(
+        const Communication& communicationModel
+    );
 
     Mobility GetMobilityModel() const;
     void SetMobilityModel(const Mobility& mobilityModel);

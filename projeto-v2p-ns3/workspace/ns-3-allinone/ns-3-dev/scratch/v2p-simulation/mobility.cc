@@ -1,9 +1,16 @@
+// mobility.cpp
 #include "mobility.h"
 
+/*
+    V2P-Simulation 0.0.1 25/07/2023
+*/
 Mobility::Mobility() : speed(0.0), acceleration(0.0), direction(0.0) {}
 
-Mobility::Mobility(double speed, double acceleration, double direction)
-    : speed(speed), acceleration(acceleration), direction(direction) {}
+Mobility::Mobility(
+    double speed,
+    double acceleration,
+    double direction
+) : speed(speed), acceleration(acceleration), direction(direction) {}
 
 Mobility::~Mobility() {}
 
