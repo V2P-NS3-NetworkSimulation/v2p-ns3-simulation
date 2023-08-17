@@ -92,46 +92,98 @@ A Main contém a implementação do cenário de simulação e a comunicação V2
 
 ## Semana 2: Definição do Cenário e Protocolo
 
-Nesta etapa do projeto, houve um foco na definição de um cenário de simulação e na seleção/configuração de um protocolo de comunicação básico para permitir a troca de informações entre veículos e pedestres. O código desenvolvido (especialmente a main.cc) é a parte principal da implementação que configura o ambiente de simulação, define a mobilidade dos veículos e pedestres, configura os dispositivos Wi-Fi, atribui endereços IP, cria aplicativos para enviar e receber pacotes de ping, finalmente executando a simulação.
+Nesta etapa do projeto, focamos na definição de um cenário de simulação e na seleção/configuração de um protocolo de comunicação básico para permitir a troca de informações entre veículos e pedestres. O código desenvolvido (especialmente a main.cc) é a parte principal da implementação que configura o ambiente de simulação, define a mobilidade dos veículos e pedestres, configura os dispositivos Wi-Fi, atribui endereços IP, cria aplicativos para enviar e receber pacotes de ping e finalmente executa a simulação.
+
+### Criação do Ambiente de Simulação
+
+Nesta etapa, estabelecemos o contexto virtual para a simulação. Criamos contêineres para representar os veículos e pedestres na simulação.
 
 ```cpp
-// Criação do Ambiente de Simulação
 NodeContainer vehicles;
 NodeContainer pedestrians;
 vehicles.Create(2);
 pedestrians.Create(1);
+Configuração da Mobilidade
+Definimos padrões de movimentação para veículos e pedestres dentro do cenário simulado. Utilizamos o MobilityHelper para configurar a mobilidade.
 
-// Configuração da Mobilidade
+cpp
+Copy code
 MobilityHelper vehicleMobility;
 MobilityHelper pedestrianMobility;
+
 vehicleMobility.SetPositionAllocator("ns3::GridPositionAllocator", ...);
 pedestrianMobility.SetPositionAllocator("ns3::GridPositionAllocator", ...);
+
 vehicleMobility.SetMobilityModel("ns3::ConstantVelocityMobilityModel");
 pedestrianMobility.SetMobilityModel("ns3::ConstantVelocityMobilityModel");
+
 vehicleMobility.Install(vehicles);
 pedestrianMobility.Install(pedestrians);
+Configuração do Canal de Comunicação Wi-Fi
+Definimos as propriedades do canal de comunicação para permitir a troca de dados entre os nós da simulação.
 
-// Configuração do Canal de Comunicação Wi-Fi
+cpp
+Copy code
 WifiHelper wifi;
 YansWifiChannelHelper ch;
+
 wifi.SetStandard(ns3::WIFI_STANDARD_80211n);
+
 NetDeviceContainer devices, vehicleDevices, pedestrianDevices;
+
 vehicleDevices = wifi.Install(phy, wifiMac, vehicles);
 pedestrianDevices = wifi.Install(phy, wifiMac, pedestrians);
+Configuração da Pilha de Protocolos da Internet
+Adicionamos as camadas de protocolos necessárias para habilitar a conectividade e comunicação entre os nós da simulação.
 
-// Configuração da Pilha de Protocolos da Internet
+cpp
+Copy code
 InternetStackHelper internet;
+
 internet.Install(vehicles);
 internet.Install(pedestrians);
+Atribuição de Endereços IP
+Atribuímos endereços IP às interfaces dos dispositivos Wi-Fi dos veículos e pedestres.
 
-// Atribuição de Endereços IP
+cpp
+Copy code
 Ipv4AddressHelper ipv4;
+
 ipv4.SetBase("10.0.0.0", "255.255.255.0");
+
 Ipv4InterfaceContainer vehicleInterfaces = ipv4.Assign(vehicleDevices);
 Ipv4InterfaceContainer pedestrianInterfaces = ipv4.Assign(pedestrianDevices);
+Criação de Aplicativos para Envio e Recebimento de Pacotes
+Implementamos aplicativos para possibilitar a troca de mensagens entre veículos e pedestres, usando o protocolo de eco UDP.
 
-// Criação de Aplicativos para Envio e Recebimento de Pacotes
+cpp
+Copy code
 UdpEchoClientHelper echoClientHelper(serverIp, serverPort);
 ApplicationContainer clientApps = echoClientHelper.Install(vehicles.Get(i));
-Config::ConnectWithoutContext("/NodeList/*/ApplicationList/*/$ns3::PacketSink/Rx", MakeCallback(&ReceivePacket));
 
+// Registro da Função de Retorno de Chamada
+Config::ConnectWithoutContext("/NodeList/*/ApplicationList/*/$ns3::PacketSink/Rx", MakeCallback(&ReceivePacket));
+Semana 3: Análise dos Resultados e Conclusão
+Durante as duas semanas de trabalho com o NS-3 para simular a comunicação V2P (Vehicle-to-Pedestrian), estudamos conceitos e técnicas relacionados à simulação de redes veiculares e à implementação de modelos básicos no NS-3. Concluímos o seguinte:
+
+Conceitos básicos do V2P e redes veiculares
+Uso do NS-3 como simulador de rede
+Implementação de modelos básicos no NS-3
+Configuração da mobilidade dos veículos e pedestres
+Configuração dos parâmetros Wi-Fi e do canal de comunicação
+Simulação da comunicação V2P
+Em resumo, nas primeiras duas semanas de trabalho com o NS-3 para simular o cenário de comunicação V2P, aprendemos conceitos básicos do V2P e redes veiculares, utilização do NS-3 como simulador de rede, implementação de modelos básicos, configuração da mobilidade e parâmetros de comunicação, além da simulação da comunicação V2P. Esses conhecimentos são fundamentais para o desenvolvimento e estudo de tecnologias de comunicação veicular.
+
+Simulação
+
+A simulação é executada com base nas configurações estabelecidas. Veículos e pedestres interagem de acordo com os modelos definidos, permitindo observar e analisar resultados. Ao final, a simulação é encerrada e resultados são consolidados para avaliação e conclusão do experimento.
+
+cpp
+Copy code
+Simulator::Run();
+Simulator::Destroy();
+Conclusão
+
+Essa implementação demonstra um cenário onde veículos e pedestres se comunicam usando pacotes de ping via Wi-Fi. Os veículos enviam pacotes de ping ao pedestre, que responde. A função de retorno de chamada ReceivePacket imprime informações sobre os pacotes recebidos. Isso representa uma simulação inicial da comunicação básica V2P no NS-3, conforme planejado na metodologia do projeto.
+
+perl
