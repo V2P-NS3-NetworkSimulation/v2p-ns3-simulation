@@ -87,4 +87,51 @@ Membros:
 
 ### Main
 A Main contém a implementação do cenário de simulação e a comunicação V2P entre um veículo e um pedestre. Ele utiliza as classes Vehicle e Pedestrian para criar os objetos do cenário, define a mobilidade e comunicação dos veículos e pedestres, e simula a comunicação V2P entre eles.
+</hr>
+# Simulação de Comunicação Vehicle-to-Pedestrian (V2P) no NS-3
+
+## Semana 2: Definição do Cenário e Protocolo
+
+Nesta etapa do projeto, houve um foco na definição de um cenário de simulação e na seleção/configuração de um protocolo de comunicação básico para permitir a troca de informações entre veículos e pedestres. O código desenvolvido (especialmente a main.cc) é a parte principal da implementação que configura o ambiente de simulação, define a mobilidade dos veículos e pedestres, configura os dispositivos Wi-Fi, atribui endereços IP, cria aplicativos para enviar e receber pacotes de ping, finalmente executando a simulação.
+
+```cpp
+// Criação do Ambiente de Simulação
+NodeContainer vehicles;
+NodeContainer pedestrians;
+vehicles.Create(2);
+pedestrians.Create(1);
+
+// Configuração da Mobilidade
+MobilityHelper vehicleMobility;
+MobilityHelper pedestrianMobility;
+vehicleMobility.SetPositionAllocator("ns3::GridPositionAllocator", ...);
+pedestrianMobility.SetPositionAllocator("ns3::GridPositionAllocator", ...);
+vehicleMobility.SetMobilityModel("ns3::ConstantVelocityMobilityModel");
+pedestrianMobility.SetMobilityModel("ns3::ConstantVelocityMobilityModel");
+vehicleMobility.Install(vehicles);
+pedestrianMobility.Install(pedestrians);
+
+// Configuração do Canal de Comunicação Wi-Fi
+WifiHelper wifi;
+YansWifiChannelHelper ch;
+wifi.SetStandard(ns3::WIFI_STANDARD_80211n);
+NetDeviceContainer devices, vehicleDevices, pedestrianDevices;
+vehicleDevices = wifi.Install(phy, wifiMac, vehicles);
+pedestrianDevices = wifi.Install(phy, wifiMac, pedestrians);
+
+// Configuração da Pilha de Protocolos da Internet
+InternetStackHelper internet;
+internet.Install(vehicles);
+internet.Install(pedestrians);
+
+// Atribuição de Endereços IP
+Ipv4AddressHelper ipv4;
+ipv4.SetBase("10.0.0.0", "255.255.255.0");
+Ipv4InterfaceContainer vehicleInterfaces = ipv4.Assign(vehicleDevices);
+Ipv4InterfaceContainer pedestrianInterfaces = ipv4.Assign(pedestrianDevices);
+
+// Criação de Aplicativos para Envio e Recebimento de Pacotes
+UdpEchoClientHelper echoClientHelper(serverIp, serverPort);
+ApplicationContainer clientApps = echoClientHelper.Install(vehicles.Get(i));
+Config::ConnectWithoutContext("/NodeList/*/ApplicationList/*/$ns3::PacketSink/Rx", MakeCallback(&ReceivePacket));
 
